@@ -871,7 +871,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
   if (!v) return;
   v.muted = true; v.defaultMuted = true;
   /* Velocidade do vídeo: 1 = normal, 0.6 = 60% (mais devagar). Ajuste aqui. */
-  const VELOCIDADE = 0.6;
+  const VELOCIDADE = 0.4;
   const aplicarVelocidade = () => { v.defaultPlaybackRate = VELOCIDADE; v.playbackRate = VELOCIDADE; };
   aplicarVelocidade();
   ["loadedmetadata", "play", "playing"].forEach(ev => v.addEventListener(ev, aplicarVelocidade));
