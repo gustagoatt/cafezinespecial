@@ -870,7 +870,12 @@ document.querySelectorAll(".faq-item").forEach(item => {
   const v = document.getElementById("heroVideo");
   if (!v) return;
   v.muted = true; v.defaultMuted = true;
-  const tentar = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  /* Velocidade do vídeo: 1 = normal, 0.6 = 60% (mais devagar). Ajuste aqui. */
+  const VELOCIDADE = 0.6;
+  const aplicarVelocidade = () => { v.defaultPlaybackRate = VELOCIDADE; v.playbackRate = VELOCIDADE; };
+  aplicarVelocidade();
+  ["loadedmetadata", "play", "playing"].forEach(ev => v.addEventListener(ev, aplicarVelocidade));
+  const tentar = () => { aplicarVelocidade(); const p = v.play(); if (p && p.catch) p.catch(() => {}); };
   v.addEventListener("canplay", tentar);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) tentar(); });
   ["touchstart", "scroll", "click"].forEach(ev => document.addEventListener(ev, tentar, { once: true, passive: true }));
